@@ -1,0 +1,36 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <math.h>
+#define EPS 1e-9
+double find_root_log2 (double a, double b){
+    double mid, l;
+    if ( log2 (a) == 0){
+        printf ("%lf it is root", a);
+        return(a);
+    }
+    else if ( log2 (b) == 0){
+        printf ("%lf it is root", b);
+        return (b);
+    }
+    
+    while (b - a > EPS){
+        l = (b - a)/2;
+         mid = a + l;
+        if (log2 (mid)*log2(a) < 0) b = mid;
+        else a = mid;
+        if (log2(mid) != 0)
+        find_root_log2(a, b);
+        else if (log2(mid) == 0)
+        printf ("%lf", mid);
+}
+    return (mid);
+}
+
+
+int main(){
+    double a, b;
+    scanf ("%lf %lf", &a, &b);
+    find_root_log2 (a, b);
+    return 0;
+}
+
