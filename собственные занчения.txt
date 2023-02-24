@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <math.h>
+typedef struct complex {double Re, Im
+    } complex;
+
+void eid_vals_2(double x_11, double x_12, double x_21, double x_22, complex* y_1, complex* y_2){
+    double tmp;
+    tmp = ((x_11 - x_22)*(x_11 - x_22)) + (4*x_12*x_21);
+    if (tmp >= 0){
+        y_1 -> Re = ((x_11 + x_22) + sqrt(tmp))/2;
+        y_2 -> Re = ((x_11 + x_22) - sqrt(tmp))/2;
+        y_1 -> Im = 0;
+        y_2 -> Im = 0;
+        
+    }
+    else {
+        y_1 -> Re = (x_11+x_22)/2;
+        y_2 -> Re = (x_11+x_22)/2;
+        y_1 -> Im = sqrt(-tmp)/2;
+        y_2 -> Im = (-1)*sqrt(-tmp)/2;
+        
+    }
+    return ;
+    
+}
+
+void print_complex (complex y){
+    if (y.Im == 0.0) printf ("%lf\n", y.Re);
+    else if (y.Re == 0.0) printf ("%lfi\n", y.Im);
+    else{
+        if (y.Im > 0) printf("%lf+%lfi\n",y.Re, y.Im);
+        else  printf("%lf%lfi\n",y.Re, y.Im);
+        
+    }
+    return;
+    
+}
+
+int main() {
+    double x_11, x_12, x_21, x_22;
+    scanf ("%lf %lf\n %lf %lf", &x_11, &x_12, &x_21, &x_22);
+    complex y_1, y_2;
+    y_1.Re = 0.0;
+    y_1.Im = 0.0;
+    y_2.Re = 0.0;
+    y_2.Im = 0.0;
+    eid_vals_2(x_11, x_12, x_21, x_22, &y_1, &y_2);
+    print_complex (y_1);
+    print_complex (y_2);
+    return 0;
+    
+}
